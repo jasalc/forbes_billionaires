@@ -6,13 +6,14 @@ print scraperwiki.sqlite.execute("select * from list.swdata")
 
 import lxml.html
 import lxml.etree
-root_url = "http://www.forbes.com/wealth/billionaires/list?page="
+root_url = "forbes.com/billionaires/list/"
 initial_page = 1
 final_page = 13
+root_url_end = "/#tab:overall"
 
 for n in range(initial_page,final_page+1):
     print n
-    html = scraperwiki.scrape(root_url + str(n) )
+    html = scraperwiki.scrape(root_url + str(n) + root_url_end)
     root = lxml.html.fromstring(html)
     the_list = root.xpath("//div[@id='thelist']//table//tbody//tr") #
 
